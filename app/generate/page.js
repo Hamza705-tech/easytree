@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
-import SearchBox from './SearchBox';
+
 
 
 const Generate = () => {
