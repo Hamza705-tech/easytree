@@ -37,7 +37,7 @@ export default async function Page({ params }) {
         "handle": "harry",
         "pic": "https://avatars.githubusercontent.com/u/48705673?v=4"
     }
-    return <div className="flex min-h-screen bg-purple-400 justify-center items-start py-10">
+    return <div className="flex min-h-screen bg-gradient-to-t from-teal-200 to-emerald-100 justify-center items-start py-10">
         {item && <div className="photo flex justify-center flex-col items-center gap-4"> 
             <img src={item.pic} alt="" />
             <span className="font-bold text-xl">@{item.handle}</span>
