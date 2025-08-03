@@ -1,11 +1,14 @@
-"use client"
+'use client';
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import SearchBox from './SearchBox';
+
 
 const Generate = () => {
-
+  
   const searchParams = useSearchParams()
 
   // const [link, setlink] = useState("")
@@ -52,7 +55,7 @@ const Generate = () => {
       redirect: "follow"
     };
 
-   const r = await fetch("http://localhost:3000/api/add", requestOptions)
+   const r = await fetch("/api/add", requestOptions)
    const result = await r.json()
    if(result.success){ 
      toast.success(result.message)
@@ -69,6 +72,7 @@ const Generate = () => {
 
 
   return (
+    
     <div className=' bg-gradient-to-t from-teal-200 to-emerald-100 min-h-screen grid grid-cols-1  md:grid-cols-2'>
      
       <div className="col1 flex justify-center items-center flex-col text-gray-900">
@@ -110,6 +114,8 @@ const Generate = () => {
         <ToastContainer />
       </div>
     </div>
+
+    
   )
 }
 
