@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useState, Suspense  } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSearchParams } from 'next/navigation';
@@ -7,8 +7,10 @@ import { useSearchParams } from 'next/navigation';
 
 
 const Generate = () => {
-  
-  const searchParams = useSearchParams()
+  <Suspense fallback={<div>Loading handle...</div>}>
+  <HandleInput handle={handle} sethandle={sethandle} />
+</Suspense>
+  // const searchParams = useSearchParams()
 
   // const [link, setlink] = useState("")
   // const [linktext, setlinktext] = useState("")
@@ -65,9 +67,18 @@ const Generate = () => {
     else{
       toast.error(result.message)
     }
- 
+
+    const HandleInput = ({ handle, sethandle }) => {
+  const searchParams = useSearchParams();
+
+  React.useEffect(() => {
+    const paramHandle = searchParams.get('handle');
+    if (paramHandle) {
+      sethandle(paramHandle);
+    }
+  }, [searchParams, sethandle]);
        
-  }
+  }}
 
 
   return (
