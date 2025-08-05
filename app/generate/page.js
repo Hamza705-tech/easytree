@@ -19,6 +19,18 @@ const Generate = () => {
   const [pic, setpic] = useState("")
   const [desc, setdesc] = useState("")
 
+    const HandleInput = ({ handle, sethandle }) => {
+  const searchParams = useSearchParams();
+
+  React.useEffect(() => {
+    const paramHandle = searchParams.get('handle');
+    if (paramHandle) {
+      sethandle(paramHandle);
+    }
+  }, [searchParams, sethandle]);
+       
+  }
+
   const handleChange = (index, link, linktext) => { 
     setLinks((initialLinks)=>{
       return initialLinks.map((item, i)=>{
@@ -68,17 +80,7 @@ const Generate = () => {
       toast.error(result.message)
     }
 
-    const HandleInput = ({ handle, sethandle }) => {
-  const searchParams = useSearchParams();
-
-  React.useEffect(() => {
-    const paramHandle = searchParams.get('handle');
-    if (paramHandle) {
-      sethandle(paramHandle);
-    }
-  }, [searchParams, sethandle]);
-       
-  }}
+  }
 
 
   return (
