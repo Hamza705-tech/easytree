@@ -7,29 +7,26 @@ import { useSearchParams } from 'next/navigation';
 
 
 const Generate = () => {
-  <Suspense fallback={<div>Loading handle...</div>}>
-  <HandleInput handle={handle} sethandle={sethandle} />
-</Suspense>
-  // const searchParams = useSearchParams()
-
+  
   // const [link, setlink] = useState("")
   // const [linktext, setlinktext] = useState("")
+  const HandleInput = ({ sethandle}) => {
+    const searchParams = useSearchParams();
+    
+    React.useEffect(() => {
+      const paramHandle = searchParams.get('handle');
+      if (paramHandle) {
+        sethandle(paramHandle);
+      }
+    }, [searchParams,sethandle]);
+    
+  }
+  // const searchParams = useSearchParams()
   const [links, setLinks] = useState([{link: "", linktext: ""}])
-  const [handle, sethandle] = useState(searchParams.get('handle'))
+  const [handle, sethandle] = useState("")
   const [pic, setpic] = useState("")
   const [desc, setdesc] = useState("")
 
-    const HandleInput = ({ handle, sethandle }) => {
-  const searchParams = useSearchParams();
-
-  React.useEffect(() => {
-    const paramHandle = searchParams.get('handle');
-    if (paramHandle) {
-      sethandle(paramHandle);
-    }
-  }, [searchParams, sethandle]);
-       
-  }
 
   const handleChange = (index, link, linktext) => { 
     setLinks((initialLinks)=>{
@@ -118,7 +115,9 @@ const Generate = () => {
               <button disabled={pic == "" || handle=="" || links[0].linktext == ""} onClick={()=>{submitLinks()}} className='disabled:bg-slate-500 p-5 py-2 mx-2 w-fit my-5 bg-slate-900 text-white font-bold rounded-3xl'>Create your BitTree</button>
             </div>
           </div>
-          
+          <Suspense fallback={<div>Loading handle...</div>}>
+          <HandleInput handle={handle} sethandle={sethandle} />
+        </Suspense>
         </div>
       </div>
       <div className="col2 w-full ">
